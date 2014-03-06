@@ -44,4 +44,14 @@ public abstract class KeyListenScene extends Scene {
 		sp.setPosition(x, baseActivity.getEngine().getCamera().getHeight() / 2.0f -sp.getHeight() / 2.0f);
 		return sp;
 	}
+	
+	public Sprite placeToRightNextToBaseSprite(Sprite baseSprite, Sprite sp, float xDistance) {
+		float x = baseSprite.getX() + baseSprite.getWidth() + xDistance;
+		return placeToCenterY(sp, x);
+	}
+	
+	public Sprite placeToLeftNextToBaseSprite(Sprite baseSprite, Sprite sp , float yDistance) {
+		float x = baseSprite.getX() - baseSprite.getWidth() - yDistance;
+		return placeToCenterY(sp, x);
+	}
 }

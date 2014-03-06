@@ -1,0 +1,74 @@
+package hamaetsu.ae.slotmachine.gamelogic;
+
+import java.util.Random;
+
+public class Prize {
+	
+	static PrizeType pType;
+	private static final int    ALL = PrizeType.getAll();
+	private static final Random RAND = new Random();
+	private Player player;
+	
+	public Prize(Player player) {
+		this.player = player;
+	}
+
+	// 通常時の抽選
+	public static PrizeType lotPrizeNormal() {
+		int rnd = RAND.nextInt(ALL);
+		
+		int replay = PrizeType.REPLAY.getRandom();
+		int bell   = replay + PrizeType.BELL.getRandom();
+		int cheA   = bell   + PrizeType.CHERRY_A.getRandom();
+		int sikA   = cheA   + PrizeType.SUIKA_A.getRandom();
+		int bb1    = sikA    + PrizeType.BB1.getRandom();
+		int rb1    = bb1   + PrizeType.RB1.getRandom();
+		
+		if (rnd<replay) {
+			pType = PrizeType.REPLAY;
+		} else if(replay<=rnd && rnd< bell) {
+			pType = PrizeType.BELL;
+		} else if(bell<=rnd && rnd<cheA) {
+			pType = PrizeType.CHERRY_A;
+		} else if(rb1<=rnd && rnd<sikA) {
+			pType = PrizeType.SUIKA_A;
+		} else if(sikA<=rnd && rnd<bb1) {
+			pType = PrizeType.BB1;
+		} else if(bb1<=rnd && rnd<rb1) {
+			pType = PrizeType.RB1;
+		} else {
+			pType = PrizeType.HAZURE;
+		}
+		return pType;
+	}
+	
+	// ボーナス中に抽選
+	public static PrizeType lotPrizeBonus() {
+		int rnd = RAND.nextInt(100);
+		
+		if (rnd < 90) {
+			pType = PrizeType.BELL;
+		} else if (90 <= rnd && rnd < 95) {
+			pType = PrizeType.SUIKA_A;
+		} else {
+			pType = PrizeType.CHERRY_A;
+		}
+		return pType;
+	}
+	
+	public static int getMedal(PrizeType pType) {
+		int medal = 0;
+		switch (pType) {
+		case BELL:
+			medal = 10;
+			break;
+		case CHERRY_A:
+			medal = 4;
+			break;
+		case SUIKA_A:
+			medal = 12;
+			break;
+		}
+		return medal;
+	}
+}
