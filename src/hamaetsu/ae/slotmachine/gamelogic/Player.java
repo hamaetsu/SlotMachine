@@ -21,7 +21,13 @@ public class Player {
 		// 現在のモードを取得
 		// 小役抽選
 		Prize.lotPrize();
+		// 払い出し
+		getMedal(win);
 		// モード移行抽選
 		Mode.changeMode(prize);
+	}
+	
+	public static void getMedal(int win) {
+		medal = medal + win;
 	}
 }
