@@ -1,6 +1,6 @@
 package hamaetsu.ae.slotmachine.base;
 
-// ƒXƒƒbƒg‰æ–Ê	
+// ï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½	
 
 import org.andengine.entity.scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.Scene;
@@ -33,7 +33,6 @@ public class SlotScene extends KeyListenScene  implements IOnSceneTouchListener,
 	public void init() {
 		attachChild(getBaseActivity().getResourceUtil().getSprite("universe_bg.png"));
 		
-		// ƒŠ[ƒ‹‰æ‘œ
 		wheel1 = getBaseActivity().getResourceUtil().getSprite("wheel.png");
 	
 	}

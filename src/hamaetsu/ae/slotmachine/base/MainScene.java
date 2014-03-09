@@ -1,6 +1,6 @@
 package hamaetsu.ae.slotmachine.base;
 
-// ƒƒjƒ…[‰æ–Ê
+//
 
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.Sprite;
@@ -14,7 +14,7 @@ public class MainScene extends KeyListenScene{
 	private Sprite wheel2;
 	private Sprite wheel3;
 	
-	// ƒŠ[ƒ‹‚ÌŠÔ‚Ì‹——£
+	// ãƒªãƒ¼ãƒ«é–“ã®è·é›¢
 	private final float wheelDistance = 10; 
 	
 	public MainScene(MultiSceneActivity baseActivity) {
@@ -49,7 +49,6 @@ public class MainScene extends KeyListenScene{
 		String wheel_w = Float.toString(wheel1.getWidth());
 		String wheel_h = Float.toString(wheel1.getHeight());
 		
-		// System.out.println(wheel1_X);
 	}
 
 	@Override
