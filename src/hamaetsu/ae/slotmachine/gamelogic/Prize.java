@@ -15,7 +15,7 @@ public class Prize {
 		}
 	}
 
-	// 通常時の抽選
+	// 騾壼ｸｸ譎ゅ�ｮ謚ｽ驕ｸ
 	public static void lotPrizeNormal() {
 		int rnd = RAND.nextInt(ALL);
 		
@@ -43,7 +43,7 @@ public class Prize {
 		}
 	}
 	
-	// ボーナス中に抽選
+	// 繝懊�ｼ繝翫せ荳ｭ縺ｮ謚ｽ驕ｸ
 	public static void lotPrizeBonus() {
 
 		int rnd = RAND.nextInt(100);

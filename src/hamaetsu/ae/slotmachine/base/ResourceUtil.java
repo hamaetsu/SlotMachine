@@ -26,20 +26,18 @@ import android.graphics.BitmapFactory;
 
 public class ResourceUtil {
 
-	// 自身のインスタンス
 	private static ResourceUtil self;
-	// Context
+
 	private static BaseGameActivity gameActivity;
-	// TextureRegioの無駄な生成を防ぎ、再利用するための一時的な保管場所
+
 	private static HashMap<String, ITextureRegion> textureRegionPool;
-	// TiledTextureRegionの無駄な生成を防ぎ、再利用するための一時的な保管場所
+
 	private static HashMap<String, TiledTextureRegion> tiledTextureRegionPool;
 	
 	private ResourceUtil() {
 	
 	}
 	
-	// イニシャライズ
 	public static ResourceUtil getInstance(BaseGameActivity gameActivity) {
 		if (self == null) {
 			self = new ResourceUtil();
@@ -52,15 +50,12 @@ public class ResourceUtil {
 		return self;
 	}
 	
-	// ファイル名を与えてSpriteを得る
 	public Sprite getSprite(String fileName) {
-		// 同名のファイルからITextureRegionが生成済みであれば再利用
 		if (textureRegionPool.containsKey(fileName)) {
 			Sprite s = new Sprite(0, 0, textureRegionPool.get(fileName), gameActivity.getVertexBufferObjectManager());
 			s.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 			return s;
 		}
-		// サイズを自動的に取得するためにBitmapとして読み込み
 		InputStream is = null;
 		try {
 			is = gameActivity.getResources().getAssets().open("gfx/" + fileName);
@@ -68,7 +63,6 @@ public class ResourceUtil {
 			e.printStackTrace();
 		}
 		Bitmap bm = BitmapFactory.decodeStream(is);
-		// Bitmapのサイズを元に2のべき乗の値を取得, BitmapTextureAtlasの生成
 		BitmapTextureAtlas bta = new BitmapTextureAtlas(gameActivity.getTextureManager(), getTwoPowerSize(bm.getWidth()), getTwoPowerSize(bm.getHeight()), TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		gameActivity.getEngine().getTextureManager().loadTexture(bta);
 		ITextureRegion btr = BitmapTextureAtlasTextureRegionFactory.createFromAsset(bta, gameActivity, fileName, 0, 0);
@@ -78,8 +72,6 @@ public class ResourceUtil {
 		return s;
 	}
 	
-	// パラパラアニメのようなSpriteを生成
-	// 画像は1枚にまとめ、マス数と共に引数とする
 	public AnimatedSprite getAnimatedSprite(String fileName, int column, int row) {
 		if (tiledTextureRegionPool.containsKey(fileName)) {
 			AnimatedSprite s = new AnimatedSprite(0, 0, tiledTextureRegionPool.get(fileName), gameActivity.getVertexBufferObjectManager());
@@ -95,10 +87,8 @@ public class ResourceUtil {
 		BitmapTextureAtlas bta = new BitmapTextureAtlas(gameActivity.getTextureManager(), getTwoPowerSize(bm.getWidth()), getTwoPowerSize(bm.getHeight()), TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		gameActivity.getTextureManager().loadTexture(bta);
 		
-		// TiledTextureRegion (タイル状のTextureRegion)を作成
-		// マス数を与え、同じサイズのTextureRegionを用意
 		TiledTextureRegion ttr = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(bta, gameActivity, fileName, 0, 0, column, row);
-		// AnimatedSpriteを生成
+
 		AnimatedSprite s = new AnimatedSprite(0, 0, ttr, gameActivity.getVertexBufferObjectManager());
 		s.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		
@@ -107,7 +97,6 @@ public class ResourceUtil {
 		return s;
 	}
 	
-	// タップすると画像が切り替わるボタン機能を持つSpriteを生成
 	public ButtonSprite getButtonSprite(String normal, String pressed) {
 		
 		if (textureRegionPool.containsKey(normal) && textureRegionPool.containsKey(pressed)) {
@@ -123,8 +112,7 @@ public class ResourceUtil {
 			e.printStackTrace();
 		}
 		Bitmap bm = BitmapFactory.decodeStream(is);
-		//　ボタン生成のためのTextureRegion生成。
-		// TiledTextureRegionでなく、BuildBitmapTextureAtlasを利用する。
+
 		BuildableBitmapTextureAtlas bta = new BuildableBitmapTextureAtlas(gameActivity.getTextureManager(), getTwoPowerSize(bm.getWidth() * 2), getTwoPowerSize(bm.getHeight()));
 		ITextureRegion trNormal = BitmapTextureAtlasTextureRegionFactory.createFromAsset(bta, gameActivity, normal);
 		ITextureRegion trPressed = BitmapTextureAtlasTextureRegionFactory.createFromAsset(bta, gameActivity, pressed);
@@ -144,16 +132,12 @@ public class ResourceUtil {
 		return s;
 	}
 	
-	//　プールを開放、シングルトンを削除するための関数
 	public void resetAllTexture() {
-		// Activity.finish()だけだとシングルトンなクラスがnullにならないため
-		// 明示的にnullを代入
 		self = null;
 		textureRegionPool.clear();
 		tiledTextureRegionPool.clear();
 	}
 	
-	// 2のべき乗の値を求める
 	public int getTwoPowerSize(float size) {
 		int value = (int)(size + 1);
 		int pow2value = 64;
@@ -163,10 +147,3 @@ public class ResourceUtil {
 		return pow2value;
 	}
 }
-
-
-
-
-
-
-

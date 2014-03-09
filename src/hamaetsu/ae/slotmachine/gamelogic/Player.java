@@ -9,21 +9,17 @@ public class Player {
 	static ModeType  mode;
 		
 	public static void start() {
-		// Œ»İ‚Ì¬–ğ‚ğæ“¾
-		// ƒƒ_ƒ‹“Š“üBƒŠƒvƒŒƒC‚È‚ç‘OGƒŠƒvƒŒƒC‚È‚ç‰½‚à‚µ‚È‚¢Bƒ{[ƒiƒX’†‚È‚ç2–‡Š|‚¯
+
+		// æ–‡å­—åŒ–ã‘ãƒ†ã‚¹ãƒˆ3/9
 		if ( mode == ModeType.NORMAL) {
 			if (prize != PrizeType.REPLAY) {
 				medal = medal - 3;
 			}
-		} else {
+		} else if( mode == ModeType.BONUS){
 			medal = medal - 2;
 		}
-		// Œ»İ‚Ìƒ‚[ƒh‚ğæ“¾
-		// ¬–ğ’Š‘I
 		Prize.lotPrize();
-		// •¥‚¢o‚µ
 		getMedal(win);
-		// ƒ‚[ƒhˆÚs’Š‘I
 		Mode.changeMode(prize);
 	}
 	
