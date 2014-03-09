@@ -14,7 +14,6 @@ public class MainScene extends KeyListenScene{
 	private Sprite wheel2;
 	private Sprite wheel3;
 	
-	// リール間の距離
 	private final float wheelDistance = 10; 
 	
 	public MainScene(MultiSceneActivity baseActivity) {

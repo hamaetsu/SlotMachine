@@ -1,6 +1,5 @@
 package hamaetsu.ae.slotmachine.base;
 
-// �X���b�g���	
 
 import org.andengine.entity.scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.Scene;
