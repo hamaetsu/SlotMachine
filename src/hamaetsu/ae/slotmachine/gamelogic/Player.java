@@ -10,6 +10,7 @@ public class Player {
 		
 	public static void start() {
 
+		// 文字化けテスト3/9
 		if ( mode == ModeType.NORMAL) {
 			if (prize != PrizeType.REPLAY) {
 				medal = medal - 3;
