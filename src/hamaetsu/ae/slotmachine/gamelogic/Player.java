@@ -10,8 +10,6 @@ public class Player {
 		
 	public static void start() {
 
-		// 通常時は3枚がけ。リプレイなら減算はしない
-		// ボーナス中なら2枚がけ
 		if ( mode == ModeType.NORMAL) {
 			if (prize != PrizeType.REPLAY) {
 				medal = medal - 3;
